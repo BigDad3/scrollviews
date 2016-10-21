@@ -25,17 +25,19 @@
 结果：可行。
 具体实现：
 创建UIScrollView和UITableView的子类，重载函数
-
+`
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+`
 这个函数返回YES的话，手势不只自己会响应，还会传递下去。达到我们同时响应手势的目的。
 
 .h文件
-
+`
 @interface SuperTableView : UITableView
 
 @end
+`
 .m文件
-
+`
 @implementation SuperTableView
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
@@ -44,10 +46,11 @@
 }
 
 @end
+`
 然后整个响应过程的控制呢是在
 
 (void)scrollViewDidScroll:(UIScrollView *)scrollView里完成的。具体代码如下：
-
+`
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
  if (scrollView == superTableView) {
@@ -131,9 +134,10 @@
     beginPoint = point;
 }
 }
+`
 我定义了一个position的值来记录scrollview的位置，0 正常状态，就是刚进入界面时候的状态，此时只能下滑 1是出于中间状态此时可以上滑也可以下滑 2 滑到了最顶端的状态，此时只能往下滑。
 比如当下滑的时候此时BottomScrollview的position值为1，tableview的position位置为0，这个时候BottomScrollview响应滑动手势，tableview不响应，代码如下
-
+`
  if (tableview.position == 0 && BottomScrollview.position == 1) {
 
             [tableview setContentOffset:CGPointZero];
@@ -143,3 +147,4 @@
             }
         }
 }
+`
