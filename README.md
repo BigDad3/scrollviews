@@ -1,0 +1,2 @@
+# scrollviews
+Controller的View上有个一个Scrollview作为最下面的BottomScrollview，BottomScrollview 上面是一个View来展示一些内容，下面是一个subScrollView里面会横向排列N个tableview用来展示内容。每个tableview都会有下拉刷新跟上拉加载。
